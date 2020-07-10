@@ -3,6 +3,7 @@ import { Link, withRouter } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 import config from "../config";
+import { Helmet } from "react-helmet";
 
 // Axios configuration
 axios.defaults.baseURL =
