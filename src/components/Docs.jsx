@@ -1,11 +1,21 @@
 import React from "react";
 import styled from "styled-components";
+import { Helmet } from "react-helmet";
 // import ReactMarkdown from "react-markdown";
 // import README from "../../README.md";
 
 export default function Docs() {
   return (
     <div className="docs-main-container wrapper">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Document | ck newsletter</title>
+        <link rel="canonical" href="https://cknewsletter.tech/docs" />
+        <meta
+          name="description"
+          content="ck newsletter docs. Learn here, how to get started and setup the ck newsletter service for your site."
+        />
+      </Helmet>
       <div className="docs-container">
         <FrontContainer className="front-matter-container">
           <div className="text-container">

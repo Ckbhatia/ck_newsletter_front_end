@@ -21,7 +21,7 @@ const Login = (props) => {
     try {
       const { status, data } = await axios.post("/users/login", {
         email,
-        password
+        password,
       });
       if (status === 200) {
         // Set the user
@@ -44,6 +44,15 @@ const Login = (props) => {
 
   return (
     <Div className="login-main-container">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Login | ck newsletter</title>
+        <link rel="canonical" href="https://cknewsletter.tech/login" />
+        <meta
+          name="description"
+          content="ck newsletter login. Login here with ck newsletter account credentials."
+        />
+      </Helmet>
       <div className="form-main-container">
         <div className="form-heading-container text-center">
           <h1 className="form-heading">Log In</h1>

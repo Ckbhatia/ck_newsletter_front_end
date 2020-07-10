@@ -3,6 +3,7 @@ import { Link, withRouter } from "react-router-dom";
 import { Container } from "@material-ui/core";
 import styled from "styled-components";
 import Table from "./Table";
+import { Helmet } from "react-helmet";
 
 const Project = ({
   projects,
@@ -18,6 +19,15 @@ const Project = ({
 
   return (
     <Div className="project-main-container">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Project | ck newsletter</title>
+        <link rel="canonical" href="https://cknewsletter.tech/project/" />
+        <meta
+          name="description"
+          content="ck newsletter project. View project details, edit or delete it with available options."
+        />
+      </Helmet>
       <Container maxWidth="md">
         <div className="project-header-container">
           <h3 className="project-heading">Project</h3>

@@ -3,10 +3,20 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Container } from "@material-ui/core";
 import ListProject from "./ListProject";
+import { Helmet } from "react-helmet";
 
 export default function Dashboard({ projects, error }) {
   return (
     <Div className="dashboard-main-container">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Dashboard | ck newsletter</title>
+        <link rel="canonical" href="https://cknewsletter.tech/dashboard" />
+        <meta
+          name="description"
+          content="ck newsletter dashboard. Create and Manage your projects in dashboard"
+        />
+      </Helmet>
       <Container maxWidth="md">
         <div className="dashboard-header-container">
           <div className="heading-text-container">

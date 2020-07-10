@@ -1,10 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import styled from "styled-components";
 
 export default function PageNotFound({ homeLink }) {
   return (
     <Div className="page-not-found-main-container">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>404 Error | ck newsletter</title>
+        <link rel="canonical" href="https://cknewsletter.tech/*" />
+        <meta name="description" content="ck newsletter 404 error." />
+      </Helmet>
       <div className="page-not-found-container">
         <h1 className="page-not-found-heading">404</h1>
         <p className="page-not-found-text">Oops! Page not found.</p>

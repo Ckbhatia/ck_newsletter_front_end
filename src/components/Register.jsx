@@ -3,6 +3,7 @@ import { Link, withRouter } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 import config from "../config";
+import { Helmet } from "react-helmet";
 
 // Axios configuration
 axios.defaults.baseURL =
@@ -25,7 +26,7 @@ const Register = (props) => {
         name,
         username,
         email,
-        password
+        password,
       });
       if (status === 201) {
         // Redirect the user to login page
@@ -41,6 +42,15 @@ const Register = (props) => {
 
   return (
     <Div className="login-main-container">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Register | ck newsletter</title>
+        <link rel="canonical" href="https://cknewsletter.tech/register" />
+        <meta
+          name="description"
+          content="ck newsletter Register. Create a ck newsletter account here."
+        />
+      </Helmet>
       <div className="form-main-container">
         <div className="form-heading-container text-center">
           <h1 className="form-heading">Register</h1>

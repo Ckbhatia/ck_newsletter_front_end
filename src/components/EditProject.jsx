@@ -3,6 +3,7 @@ import { withRouter } from "react-router-dom";
 import styled from "styled-components";
 import { Container } from "@material-ui/core";
 import axios from "axios";
+import { Helmet } from "react-helmet";
 import ProjectForm from "./ProjectForm";
 
 // This component works for both, create project and edit project.
@@ -108,6 +109,15 @@ function EditProject({
 
   return (
     <ProjectContainer className="create-project-main-container">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Create or Edit Project | ck newsletter</title>
+        <link rel="canonical" href="https://cknewsletter.tech/project/" />
+        <meta
+          name="description"
+          content="ck newsletter create or edit project. Create a new project or edit chosen project."
+        />
+      </Helmet>
       <Container maxWidth="sm">
         <Div className="main-container">
           <div className="msg-txt-container center-child">

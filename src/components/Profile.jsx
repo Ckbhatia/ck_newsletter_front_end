@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Container } from "@material-ui/core";
 import axios from "axios";
+import { Helmet } from "react-helmet";
 
 export default function Profile(props) {
   const [name, updateName] = useState("");
@@ -93,6 +94,18 @@ export default function Profile(props) {
 
   return (
     <ProfileElement className="profile-main-container">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Profile | ck newsletter</title>
+        <link
+          rel="canonical"
+          href="https://cknewsletter.tech/account/profile"
+        />
+        <meta
+          name="description"
+          content="ck newsletter user profile. Manage user profile or add email credentials and choose an email service to be used for newsletter."
+        />
+      </Helmet>
       <Container maxWidth="sm">
         <Div className="main-container">
           <div className="msg-txt-container center-child">
