@@ -120,6 +120,8 @@ export default function Docs() {
               <p>4. Save it</p>
             </li>
           </ol>
+            <p>Note: Please grant permission to your email account to be used behalf of you.</p>
+            <p>You can find helpful resources on the internet as per your service or contact us for help.</p>
 
           <h3 id="four">Set-up the subscribe!</h3>
 
@@ -224,8 +226,8 @@ export default function Docs() {
 
           <h2>Support</h2>
           <p> Feel free to reach out to me on</p>
-          <a href="mailto:chetansain86@gmail.com" target="_blank">
-            chetansain86@gmail.com
+          <a href="mailto:cknewsletterservice@gmail.com" target="_blank">
+            cknewsletterservice@gmail.com
           </a>
           <p>with any and all questions and/or feedback.</p>
         </DocWrapper>
