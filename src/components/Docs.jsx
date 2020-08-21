@@ -80,11 +80,11 @@ export default function Docs() {
             </li>
             <li>
               <p>2. Click on new to create a new project.</p>
-              <img src="http://imgur.com/CZNPiDtl.png" width="20%" />
+              <img src="https://res.cloudinary.com/citybazz/image/upload/v1598018555/cknewsletter/uoydolsfrfquaqzanvgf.jpg" width="20%" />
             </li>
             <li>
               <p>3. Fill details about your project.</p>
-              <img src="http://imgur.com/Wz1Is2Ul.png" width="40%" />
+              <img src="https://res.cloudinary.com/citybazz/image/upload/v1598018577/cknewsletter/up5qw2eocegnhetyoa9d.jpg" width="40%" />
               <p>
                 {" "}
                 Optionally, you can set-up your custom ( HTML ) newsletter
