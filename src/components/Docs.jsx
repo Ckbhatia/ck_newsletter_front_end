@@ -123,7 +123,7 @@ export default function Docs() {
             <p>Note: Please grant permission to your email account to be used behalf of you.</p>
             <p>You can find helpful resources on the internet as per your service or contact us for help.</p>
 
-          <p><b className={{color: "red"}}>New</b>: you can also use <a href="https://www.npmjs.com/package/cknewsletter_hook" target="_blank">cknewsletter_hook</a>node package<br />, It requires low-code/no code.</p>
+          <p className="note-text"><b  style={{color: "red"}}>New</b>: you can also use <a href="https://www.npmjs.com/package/cknewsletter_hook" target="_blank">cknewsletter_hook</a>node package<br />, It requires low-code/no code.</p>
 
           <h3 id="four">Set-up the subscribe!</h3>
 
@@ -298,5 +298,10 @@ const DocWrapper = styled.div`
   }
   .rel-link {
     color: #663399;
+  }
+
+  .note-text {
+    margin: 4rem 0;
+    padding: 1rem 0;
   }
 `;
