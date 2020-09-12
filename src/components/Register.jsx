@@ -9,7 +9,7 @@ import { Helmet } from "react-helmet";
 // Axios configuration
 const rootUrl = process.env.NODE_ENV === "production"
   ? config.productionRootURL
-  : "http://localhost:3000/";
+  : "http://localhost:3000";
 
 axios.defaults.baseURL = rootUrl;
 
@@ -44,7 +44,7 @@ const Register = (props) => {
 
   const handleSocialLogin = (app) => {
     window.open(
-      `${rootUrl}users/auth/${app}`,
+      `${rootUrl}/users/auth/${app}`,
       "_self"
     );
   };
