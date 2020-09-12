@@ -80,11 +80,11 @@ export default function Docs() {
             </li>
             <li>
               <p>2. Click on new to create a new project.</p>
-              <img src="http://imgur.com/CZNPiDtl.png" width="20%" />
+              <img src="https://res.cloudinary.com/citybazz/image/upload/v1598018555/cknewsletter/uoydolsfrfquaqzanvgf.jpg" width="20%" />
             </li>
             <li>
               <p>3. Fill details about your project.</p>
-              <img src="http://imgur.com/Wz1Is2Ul.png" width="40%" />
+              <img src="https://res.cloudinary.com/citybazz/image/upload/v1598018577/cknewsletter/up5qw2eocegnhetyoa9d.jpg" width="40%" />
               <p>
                 {" "}
                 Optionally, you can set-up your custom ( HTML ) newsletter
@@ -120,6 +120,10 @@ export default function Docs() {
               <p>4. Save it</p>
             </li>
           </ol>
+            <p>Note: Please grant permission to your email account to be used behalf of you.</p>
+            <p>You can find helpful resources on the internet as per your service or contact us for help.</p>
+
+          <p className="note-text"><b  style={{color: "red"}}>New</b>: you can also use <a href="https://www.npmjs.com/package/cknewsletter_hook" target="_blank">cknewsletter_hook</a>node package<br />, It requires low-code/no code.</p>
 
           <h3 id="four">Set-up the subscribe!</h3>
 
@@ -224,8 +228,8 @@ export default function Docs() {
 
           <h2>Support</h2>
           <p> Feel free to reach out to me on</p>
-          <a href="mailto:chetansain86@gmail.com" target="_blank">
-            chetansain86@gmail.com
+          <a href="mailto:cknewsletterservice@gmail.com" target="_blank">
+            cknewsletterservice@gmail.com
           </a>
           <p>with any and all questions and/or feedback.</p>
         </DocWrapper>
@@ -294,5 +298,10 @@ const DocWrapper = styled.div`
   }
   .rel-link {
     color: #663399;
+  }
+
+  .note-text {
+    margin: 4rem 0;
+    padding: 1rem 0;
   }
 `;
