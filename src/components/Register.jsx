@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { FaGithub, FaGoogle, FaFacebookF, FaTwitter } from 'react-icons/fa';
 import axios from "axios";
 import config from "../config";
+import { Helmet } from "react-helmet";
 
 // Axios configuration
 const rootUrl = process.env.NODE_ENV === "production"
