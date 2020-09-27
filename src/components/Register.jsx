@@ -122,8 +122,8 @@ const Register = (props) => {
             Or, use another account:
           </h2>
           <div className="social-login-btn-container">
-            <button className="social-btn" onClick={() => { handleSocialLogin("google") }}><FaGoogle /></button>
-            <button className="social-btn" onClick={() => { handleSocialLogin("github") }}><FaGithub /></button>
+            {/* <button className="social-btn" onClick={() => { handleSocialLogin("google") }}><FaGoogle /></button>
+            <button className="social-btn" onClick={() => { handleSocialLogin("github") }}><FaGithub /></button>*/}
             {/* <button className="social-btn" onClick={() => { handleSocialLogin("facebook") }}><FaFacebookF /></button>
             <button className="social-btn" onClick={() => { handleSocialLogin("twitter") }}><FaTwitter /></button> */}
           </div>
