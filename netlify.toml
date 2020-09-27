@@ -2,6 +2,7 @@
   from = "/users/auth/google"
   to = "https://cknewsletter.herokuapp.com/users/auth/google"
   status = 302
+  force = true
 
 [[redirects]]
   from = "/*"
