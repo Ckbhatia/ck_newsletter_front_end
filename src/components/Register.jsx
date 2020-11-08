@@ -14,21 +14,21 @@ const rootUrl = process.env.NODE_ENV === "production"
 axios.defaults.baseURL = rootUrl;
 
 const Register = (props) => {
-  const [name, updateName] = useState("");
-  const [username, updateUsername] = useState("");
-  const [email, updateEmail] = useState("");
-  const [password, updatePassword] = useState("");
+  const [formData, setFormData] = useState({});
   const [isError, updateError] = useState(false);
+
+  const handleEdit = (e) => {
+    const field = e.target.name;
+    const value = e.target.value;
+    setFormData({ ...formData, [field]: value });
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       const { status } = await axios.post("/users/register", {
-        name,
-        username,
-        email,
-        password
+        formData
       });
       if (status === 201) {
         // Redirect the user to login page
@@ -81,8 +81,8 @@ const Register = (props) => {
               className="input"
               placeholder="Name"
               minLength="4"
-              value={name}
-              onChange={(e) => updateName(e.target.value)}
+              value={formData.name || ""}
+              onChange={handleEdit}
             />
             <input
               required
@@ -91,8 +91,8 @@ const Register = (props) => {
               className="input"
               placeholder="Username"
               minLength="4"
-              value={username}
-              onChange={(e) => updateUsername(e.target.value)}
+              value={formData.username || ""}
+              onChange={handleEdit}
             />
             <input
               required
@@ -101,8 +101,8 @@ const Register = (props) => {
               className="input"
               placeholder="Email"
               minLength="12"
-              value={email}
-              onChange={(e) => updateEmail(e.target.value)}
+              value={formData.email || ""}
+              onChange={handleEdit}
             />
             <input
               required
@@ -111,8 +111,8 @@ const Register = (props) => {
               className="input"
               placeholder="Password"
               minLength="6"
-              value={password}
-              onChange={(e) => updatePassword(e.target.value)}
+              value={formData.password || ""}
+              onChange={handleEdit}
             />
             <input className="submit-btn" type="submit" value="Register" />
           </form>
@@ -123,7 +123,7 @@ const Register = (props) => {
           </h2>
           <div className="social-login-btn-container">
             {/* <button className="social-btn" onClick={() => { handleSocialLogin("google") }}><FaGoogle /></button>
-            <button className="social-btn" onClick={() => { handleSocialLogin("github") }}><FaGithub /></button>*/}
+            <button className="social-btn" onClick={() => { handleSocialLogin("github") }}><FaGithub /></button> */}
             {/* <button className="social-btn" onClick={() => { handleSocialLogin("facebook") }}><FaFacebookF /></button>
             <button className="social-btn" onClick={() => { handleSocialLogin("twitter") }}><FaTwitter /></button> */}
           </div>
