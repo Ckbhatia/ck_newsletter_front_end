@@ -135,10 +135,12 @@ export default function Docs() {
             </li>
             <li>
               <p> 2. Need to put two properties into the payload ( body ).</p>
+
               <code>
                 "subscriber": "\***\***\*@gmail.com", "apiKey":
                 "15870449476249g9uo\*\*\*\*"
               </code>
+
               <p>
                 {" "}
                 The <code>subscriber</code> should be dynamic. It should be your
@@ -177,10 +179,10 @@ export default function Docs() {
             <li>
               <p>
                 2. Need to put two properties into the payload ( body ).
+              </p>
                 <code>
                   "slug": "vue", "apiKey": "15870449476249g9uo\*\*\*\*"
                 </code>
-              </p>
               <p>
                 Replace the <code>apiKey</code> with your project's API key.
               </p>
