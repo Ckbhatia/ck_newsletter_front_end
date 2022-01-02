@@ -3,7 +3,7 @@ import { Switch, Route, withRouter } from "react-router-dom";
 import axios from "axios";
 import Context from "./Context";
 import Layout from "./Layout";
-import Loader from "./Loader";
+// import Loader from "./Loader";
 import config from "../config";
 
 import Landing from "./Landing";
@@ -15,12 +15,13 @@ import Project from "./Project";
 import EditProject from "./EditProject";
 import PageNotFound from "./PageNotFound";
 import Docs from "./Docs";
+import { production_text } from "../constants";
 
 // Axios configuration
 axios.defaults.baseURL =
-  process.env.NODE_ENV === "production"
-    ? config.productionRootURL
-    : "http://localhost:3000/";
+  process.env.NODE_ENV === production_text
+    ? config.productionURL
+    : config.developmentURL;
 
 const App = (props) => {
   const [user, updateUser] = useState(null);
