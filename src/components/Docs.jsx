@@ -66,7 +66,7 @@ export default function Docs() {
           <h3 id="one">How to create an account?</h3>
           <ol>
             <li>
-              <p>1. Open the cknewsletter.herokuapp.com</p>
+              <p>1. Open the</p> <a href="https://cknewsletter.netlify.com">cknewsletter.netlify.com</a>
             </li>
             <li>
               <p>2. Sign up with your email account.</p>
@@ -80,14 +80,13 @@ export default function Docs() {
             </li>
             <li>
               <p>2. Click on new to create a new project.</p>
-              <img src="https://res.cloudinary.com/citybazz/image/upload/v1598018555/cknewsletter/uoydolsfrfquaqzanvgf.jpg" width="20%" />
+              <img src="https://res.cloudinary.com/citybazz/image/upload/v1598018555/cknewsletter/uoydolsfrfquaqzanvgf.jpg" width="40%" />
             </li>
             <li>
               <p>3. Fill details about your project.</p>
-              <img src="https://res.cloudinary.com/citybazz/image/upload/v1598018577/cknewsletter/up5qw2eocegnhetyoa9d.jpg" width="40%" />
               <p>
                 {" "}
-                Optionally, you can set-up your custom ( HTML ) newsletter
+                Optionally, you can create and put your custom ( HTML ) newsletter
                 template.
               </p>
             </li>
@@ -120,10 +119,12 @@ export default function Docs() {
               <p>4. Save it</p>
             </li>
           </ol>
+            <p>Your email & password is confidential and kept secret to everyone.</p>
+            <p>Altough, we are planing to integrate own email service and also taking direct permission from your email service provider instead of credentials.</p>
             <p>Note: Please grant permission to your email account to be used behalf of you.</p>
             <p>You can find helpful resources on the internet as per your service or contact us for help.</p>
 
-          <p className="note-text"><b  style={{color: "red"}}>New</b>: you can also use <a href="https://www.npmjs.com/package/cknewsletter_hook" target="_blank">cknewsletter_hook</a>node package<br />, It requires low-code/no code.</p>
+          <p className="note-text"><b  style={{color: "red"}}>PRO TIP:</b>: you can also use <a href="https://www.npmjs.com/package/cknewsletter_hook" target="_blank">cknewsletter_hook</a> node package<br />. It requires low-code/no code.</p>
 
           <h3 id="four">Set-up the subscribe!</h3>
 
@@ -137,13 +138,13 @@ export default function Docs() {
               <p> 2. Need to put two properties into the payload ( body ).</p>
 
               <code>
-                "subscriber": "\***\***\*@gmail.com", "apiKey":
-                "15870449476249g9uo\*\*\*\*"
+                "subscriber": "ch*****@gmail.com", 
+                "apiKey": "15870449476249g9uo*****"
               </code>
 
               <p>
                 {" "}
-                The <code>subscriber</code> should be dynamic. It should be your
+                The <code>subscriber</code> should be dynamic. This should be your
                 subscriber's email.
               </p>
               <p>
@@ -155,11 +156,11 @@ export default function Docs() {
               <p>
                 3. Now you can make a patch request with these data on this
                 endpoint:
-                https://cknewsletter.herokuapp.com/api/v1/projects/subscribe
+                `https://cknewsletter.herokuapp.com/api/v1/projects/subscribe`
               </p>
             </li>
             <li>
-              <p>4. Your subscribers will be stored in this project's data.</p>
+              <p>4. Your subscribers will be stored in your project on this platform.</p>
             </li>
             <li>
               <p>
@@ -168,6 +169,7 @@ export default function Docs() {
               </p>
             </li>
           </ol>
+          <p>Note: shoot an email if you need more help with this</p>
 
           <h3 id="five">Set-up the push newsletters!</h3>
           <ol>
