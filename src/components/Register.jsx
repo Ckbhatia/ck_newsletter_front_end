@@ -17,32 +17,38 @@ axios.defaults.baseURL = rootUrl;
 const Register = (props) => {
   const [formData, setFormData] = useState({});
   const [isError, updateError] = useState(false);
+  const [message, setMessages] = useState("");
 
   const handleEdit = (e) => {
     const field = e.target.name;
     const value = e.target.value;
     setFormData({ ...formData, [field]: value });
-  }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setMessages("");
 
     try {
       const { status } = await axios.post("/users/register", {
-        ...formData
+        ...formData,
       });
       if (status === 201) {
+        setMessages("Successfully registered. Please login.");
         // Redirect the user to login page
-        props.history.push("/login");
+        setTimeout(() => {
+          props.history.push("/login");
+        }, 1000);
       } else {
+        setMessages("Something went wrong. Please try again.");
         // Change the state to true for error
         updateError(true);
       }
     } catch (err) {
+      setMessages("Something went wrong. Please try again.");
       updateError(true);
     }
   };
-  
   // Note: not required for now
   // const handleSocialLogin = (app) => {
   //   window.open(
@@ -63,16 +69,18 @@ const Register = (props) => {
         />
       </Helmet>
       <div className="form-main-container">
+        <div
+          className={`message-container center-child ${
+            isError ? "alert" : "success"
+          }`}
+        >
+          {message ? <span className="message-text">{message}</span> : null}
+        </div>
         <div className="form-heading-container text-center">
           <h2 className="form-heading">Register</h2>
           <Link className="login-link" to="/login">
             Have an account?
           </Link>
-        </div>
-        <div className="error-container center-child">
-          <span className={`error-text error-${isError}`}>
-            Username or email is already taken.
-          </span>
         </div>
         <div className="form-container flex-center">
           <form className="form" onSubmit={handleSubmit}>

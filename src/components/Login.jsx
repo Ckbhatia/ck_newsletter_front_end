@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import { Link, withRouter } from "react-router-dom";
+// import styled from "styled-components";
 // import { FaGithub, FaGoogle, FaFacebookF, FaTwitter } from 'react-icons/fa';
 import axios from "axios";
 import config from "../config";
 import { Helmet } from "react-helmet";
+import { production_text } from "../constants";
 import { StyledAuthenticationWrapper } from "./Common";
 
 // Axios configuration
-const rootUrl = process.env.NODE_ENV === "production"
-  ? config.productionRootURL
-  : "http://localhost:3000";
+const rootUrl = process.env.NODE_ENV === production_text
+  ? config.productionURL
+  : config.developmentURL;
 
 axios.defaults.baseURL = rootUrl;
 
@@ -17,9 +19,11 @@ const Login = (props) => {
   const [email, updateEmail] = useState("");
   const [password, updatePassword] = useState("");
   const [isError, updateError] = useState(false);
+  const [message, setMessages] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setMessages("");
 
     try {
       const { status, data } = await axios.post("/users/login", {
@@ -37,10 +41,12 @@ const Login = (props) => {
         // Redirect the user to dashboard page
         props.history.push("/dashboard");
       } else {
+        setMessages("Something went wrong. Please try again.");
         // Change the state to true for error
         updateError(true);
       }
     } catch (err) {
+      setMessages("Something went wrong. Please try again.");
       updateError(true);
     }
   };
@@ -65,16 +71,16 @@ const Login = (props) => {
         />
       </Helmet>
       <div className="form-main-container">
+        <div className={`message-container center-child ${isError ? 'alert' : 'success'}`}>
+          {message ? (
+            <span className="message-text">{message}</span>
+          ) : null}
+        </div>
         <div className="form-heading-container text-center">
           <h2 className="form-heading">Log In</h2>
           <Link className="login-link" to="/register">
             Don't have an account?
           </Link>
-        </div>
-        <div className="error-container center-child">
-          <span className={`error-text error-${isError}`}>
-            Email or password is invalid
-          </span>
         </div>
         <div className="form-container flex-center">
           <form className="form" onSubmit={handleSubmit}>
