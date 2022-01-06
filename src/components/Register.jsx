@@ -29,7 +29,7 @@ const Register = (props) => {
 
     try {
       const { status } = await axios.post("/users/register", {
-        formData
+        ...formData
       });
       if (status === 201) {
         // Redirect the user to login page
