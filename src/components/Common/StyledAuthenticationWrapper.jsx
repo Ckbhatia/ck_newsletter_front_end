@@ -6,6 +6,30 @@ import styled from "styled-components";
   align-items: center;
   height: 85vh;
 
+  .message-container {
+    padding: 0 1.2rem;
+    margin-bottom: 15px;
+   
+    &.alert {
+      background-color: #ff5a5f;
+    }
+
+    &.success {
+      background-color: #4BB543;
+    }
+  }
+
+  .message-text {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #fff;
+    padding: 0.8rem 0;
+    width: 100%;
+    padding: 1rem 0;
+    margin-left: 1.2rem;
+    margin-right: 1.2rem;
+  }
+
   .form-main-container {
     width: 100%;
     max-width: 30%;
@@ -36,7 +60,6 @@ import styled from "styled-components";
   .form-heading {
     font-size: 1.5rem;
     font-weight: 500;
-
   }
 
   .login-link {
@@ -71,7 +94,7 @@ import styled from "styled-components";
       margin: 10px 20px;
       &:hover {
         background-color: rgba(234, 234, 234, 0.9);
-border-radius: 5px;
+        border-radius: 5px;
       }
     }
   }
@@ -107,29 +130,6 @@ border-radius: 5px;
         background-color: #4fbfff;
       }
     }
-  }
-  .error-container {
-    // position: relative;
-    // top: 20px;
-    text-align: center;
-    width: 100%;
-    height: 100%;
-  }
-
-  .error-text {
-    font-size: 1.2rem;
-    font-weight: bold;
-    background-color: #ff1f35;
-    color: #fff;
-    padding: 0.8rem 0;
-    width: 100%;
-  }
-  .error-false {
-    visibility: hidden;
-  }
-
-  .error-true {
-    visibility: visible;
   }
 `;
 
