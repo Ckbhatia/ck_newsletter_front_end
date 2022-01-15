@@ -1,68 +1,100 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p align="center">
+  <h1> 
+   <img src="https://i.ibb.co/C5zTRC8/logo-via-logohub.png" alt="ck newsletter" width="20%">
+   - A newsletter service 
+  </h1>
+</p>
 
-## Available Scripts
+[![Github](https://img.shields.io/github/stars/ckbhatia/ck_newsletter?style=social)]
 
-In the project directory, you can run:
+This service aims to aid small and mid-sized bloggers to automate the process of delivering newsletters to subscribers. Blogger needs to hook two requests to their blog code and focus on writing amazing blogs. Your subscribers are going to receive the newsletters when you publish a new.
 
-### `yarn start`
+This is a client repo of Ck newsletter project. Back End repo: https://github.com/Ckbhatia/ck_newsletter
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Table of contents:
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+- How to create an account?
+- How to create a project?
+- How to activate newsletter service?
+- Set-up the subscribe.
+- Set-up the push newsletters.
 
-### `yarn test`
+### How to create an account?
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Open the cknewsletter.netlify.app
+2. Sign up with your email account.
 
-### `yarn build`
+### How to create a project?
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Sign In with your account credentials.
+2. Click on new to create a new project.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+   <img src="http://imgur.com/CZNPiDtl.png" width="20%"/>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. Fill details about your project.
 
-### `yarn eject`
+   <img src="http://imgur.com/Wz1Is2Ul.png" width="40%"/>
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+   - Optionally, you can set-up your custom ( HTML ) newsletter template.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+4. Submit it.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### How to activate newsletter service?
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+<small>These email credentials will be used to send newsletters to your subscribers.</small>
 
-## Learn More
+1. You need to go to the profile page.
+2. Put your email and password credential to the relative input fields.
+3. Select your email service.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+   <img src="http://imgur.com/2wXn83ul.png" width="40%" />
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+4. Save it.
 
-### Code Splitting
+### Set-up the subscribe!
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+1. Create a fetch request with <code>PATCH</code> method.
+2. Need to put two properties into the payload ( body ).
+```
+  {
+   "subscriber": "*******@gmail.com",
+   "apiKey": "15870449476249g9uo****"
+  }
+```
 
-### Analyzing the Bundle Size
+   - The <code>subscriber</code> should be dynamic. It should be your subscriber's email.
+   - The <code>apiKey</code> should be your project's API Key.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+3. Now you can make a patch request with these data on this endpoint: https://cknewsletter.herokuapp.com/api/v1/projects/subscribe
+4. Your subscribers will be stored in this project's data.
+5. Place this code in your blog's code where it will be invoked whenever your user submit the subscribe form.
 
-### Making a Progressive Web App
+### Set-up the push newsletters!
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+1. Create a fetch request with <code>PATCH</code> method.
+2. Need to put two properties into the payload ( body ).
 
-### Advanced Configuration
+```
+  {
+    "slug": "get-started-with-vue",
+    "apiKey": "15870449476249g9uo\*\*\*\*"
+  }
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+   - Replace the apiKey with your project's API key.
+   - Slug should be dynamic. Your article slug or id should be the value of slug key.
 
-### Deployment
+3. Notice that your slug will be used to create the link to your article. For Ex: "https://myblog.com/blog/get-started-with-vue"
+4. Now you can make a patch request with these data on this endpoint: https://cknewsletter.herokuapp.com/api/v1/projects/slug
+5. Place this patch request code to your blog code where it makes this request every time whenever you publish a new article.
+6. It will push the newsletter to your subscribers of particular project.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+**Voila, You are done now. Now write the best and keep your subscribers in sync with your latest articles.**
 
-### `yarn build` fails to minify
+## Support
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Feel free to reach out to me on cknewsletterservice@gmail.com
+
+# License
+
+This project is **MIT licensed** unless otherwise specified.
