@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { Container } from "@material-ui/core";
 import ListProject from "./ListProject";
 import { Helmet } from "react-helmet";
+import { FcPlus } from "react-icons/fc";
 
 export default function Dashboard({ projects, error }) {
   return (
@@ -24,7 +25,10 @@ export default function Dashboard({ projects, error }) {
           </div>
           <div className="create-btn-container">
             <Link to="/projects/create" className="create-btn">
-              New
+              <span>New </span>
+              <span>
+                <FcPlus />
+              </span>
             </Link>
           </div>
           <div
@@ -74,16 +78,20 @@ let Div = styled.div`
     display: flex;
     justify-content: flex-end;
     .create-btn {
+      display: flex;
+      align-items: center;
+      column-gap: 10px;
+      padding: 10px 20px;
+      border-radius: 5px;
       font-size: 1.2rem;
+      line-height: 0;
       color: #fff;
-      background-color: #35dd30;
+      background-color: rgb(76, 175, 80);
       border: none;
-      border-radius: 2px;
-      padding: 0.5rem 1.2rem;
       text-decoration: none;
       cursor: pointer;
       &:hover {
-        background-color: #17c712;
+        background-color: rgb(75 169 78);
       }
     }
   }
