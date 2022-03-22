@@ -130,6 +130,9 @@ import styled from "styled-components";
         background-color: #4fbfff;
       }
     }
+    .guest {
+      margin-left: 15px;
+    }
   }
 `;
 

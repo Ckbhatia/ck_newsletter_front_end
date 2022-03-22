@@ -29,15 +29,11 @@ const StyledTableRow = withStyles((theme) => ({
   }
 }))(TableRow);
 
-function createData(
-  projectName,
-  siteUrl,
-  lastUpdate,
-  apiKey,
-  subscribers,
-  slugs
+function createObject(
+  key,
+  value,
 ) {
-  return { projectName, siteUrl, lastUpdate, apiKey, subscribers, slugs };
+  return { key, value };
 }
 
 const useStyles = makeStyles({
@@ -75,29 +71,21 @@ export default function Table({ projectData }) {
       createdAt
     } = projectData;
 
-    if (isCustomTemplate === "true") {
-      rows = [
-        createData("Project Name", name),
-        createData("Site URL", siteUrl),
-        createData("Last update", simplifyDate(updatedAt)),
-        createData("API Key", apiKey),
-        createData("Subscribers", addCommas(subscribers)),
-        createData("Slugs", addCommas(slugs)),
-        createData("isCustomTemplate", isCustomTemplate),
-        createData("customTemplateData", customTemplateData),
-        createData("Created", simplifyDate(createdAt))
-      ];
-    } else {
-      rows = [
-        createData("Project Name", name),
-        createData("Site URL", siteUrl),
-        createData("Last update", simplifyDate(updatedAt)),
-        createData("API Key", apiKey),
-        createData("Subscribers", addCommas(subscribers)),
-        createData("Slugs", addCommas(slugs)),
-        createData("isCustomTemplate", isCustomTemplate),
-        createData("Created", simplifyDate(createdAt))
-      ];
+    const hasCustomTemplate = isCustomTemplate  === "true";
+
+    rows = [
+      createObject("Project Name", name),
+      createObject("Site URL", siteUrl),
+      createObject("Last update", simplifyDate(updatedAt)),
+      createObject("API Key", <code>${apiKey}</code>),
+      createObject("Subscribers", addCommas(subscribers)),
+      createObject("Slugs", addCommas(slugs)),
+      createObject("Has Custom email template",  hasCustomTemplate ? "Yes" : "No"), 
+      createObject("Created", simplifyDate(createdAt))
+    ];
+
+    if (hasCustomTemplate) {
+      rows.splice(7, 0, createObject("Custom template", customTemplateData));
     }
   }
   return (
@@ -107,11 +95,11 @@ export default function Table({ projectData }) {
           <TableEl className={classes.table} aria-label="customized table">
             <TableBody>
               {rows.map((row) => (
-                <StyledTableRow key={row.projectName}>
+                <StyledTableRow key={row.key}>
                   <StyledTableCell component="th" scope="row">
-                    {row.projectName}
+                    {row.key}
                   </StyledTableCell>
-                  <StyledTableCell align="right">{row.siteUrl}</StyledTableCell>
+                  <StyledTableCell align="right">{row.value}</StyledTableCell>
                 </StyledTableRow>
               ))}
             </TableBody>

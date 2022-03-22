@@ -16,8 +16,8 @@ const rootUrl = process.env.NODE_ENV === production_text
 axios.defaults.baseURL = rootUrl;
 
 const Login = (props) => {
-  const [email, updateEmail] = useState("");
-  const [password, updatePassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [isError, updateError] = useState(false);
   const [message, setMessages] = useState("");
 
@@ -31,6 +31,9 @@ const Login = (props) => {
         password
       });
       if (status === 200) {
+        // Redirect the user to dashboard page
+        props.history.push("/dashboard")
+
         // Set the user
         await props.updateUser(data.data);
         // Fetch projects
@@ -38,8 +41,6 @@ const Login = (props) => {
         if (data.token) {
           localStorage.setItem("userToken", JSON.stringify(data.token));
         }
-        // Redirect the user to dashboard page
-        props.history.push("/dashboard");
       } else {
         setMessages("Something went wrong. Please try again.");
         // Change the state to true for error
@@ -50,6 +51,11 @@ const Login = (props) => {
       updateError(true);
     }
   };
+
+  const handleGuestLogin = () => {
+    setEmail(config.guestEmail);
+    setPassword(config.guestPassword);
+  }
 
   // Note: not required for now
   // const handleSocialLogin = (app) => {
@@ -92,7 +98,7 @@ const Login = (props) => {
               placeholder="Email"
               minLength="12"
               value={email}
-              onChange={(e) => updateEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <input
               required
@@ -102,9 +108,10 @@ const Login = (props) => {
               placeholder="Password"
               minLength="6"
               value={password}
-              onChange={(e) => updatePassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
             />
             <input className="submit-btn" type="submit" value="Log in" />
+            <button className="submit-btn guest" onClick={handleGuestLogin}>Guest log in</button>
           </form>
         </div>
         {/* <div className="social-login-container">
