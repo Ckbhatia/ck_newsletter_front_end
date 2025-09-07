@@ -1,52 +1,40 @@
 import React from "react";
-import { withStyles, makeStyles } from "@material-ui/core/styles";
 import {
   Table as TableEl,
   TableBody,
   TableCell,
   TableContainer,
   TableRow,
-  Paper
-} from "@material-ui/core";
-import styled from "styled-components";
+  Paper,
+} from "@mui/material";
 import Loader from "./Loader";
+import { styled } from "@mui/material/styles";
 
-const StyledTableCell = withStyles((theme) => ({
-  head: {
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${TableCell.head}`]: {
     backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white
+    color: theme.palette.common.white,
   },
-  body: {
-    fontSize: 14
-  }
-}))(TableCell);
+  [`&.${TableCell.body}`]: {
+    fontSize: 14,
+  },
+}));
 
-const StyledTableRow = withStyles((theme) => ({
-  root: {
-    "&:nth-of-type(odd)": {
-      backgroundColor: theme.palette.background.default
-    }
-  }
-}))(TableRow);
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  "&:nth-of-type(odd)": {
+    backgroundColor: theme.palette.action.hover,
+  },
+}));
 
-function createObject(
-  key,
-  value,
-) {
+function createObject(key, value) {
   return { key, value };
 }
 
-const useStyles = makeStyles({
-  table: {
-    minWidth: 200
-  }
-});
-
 const simplifyDate = (date) => {
   let newDate = new Date(date);
-  newDate = `${newDate
+  newDate = `${newDate.toISOString().substring(0, 10)} ${newDate
     .toISOString()
-    .substring(0, 10)} ${newDate.toISOString().substring(11, 19)}`;
+    .substring(11, 19)}`;
   return newDate;
 };
 
@@ -55,7 +43,6 @@ const addCommas = (arr) => {
 };
 
 export default function Table({ projectData }) {
-  const classes = useStyles();
   let rows;
 
   if (projectData) {
@@ -68,10 +55,10 @@ export default function Table({ projectData }) {
       isCustomTemplate,
       customTemplateData,
       updatedAt,
-      createdAt
+      createdAt,
     } = projectData;
 
-    const hasCustomTemplate = isCustomTemplate  === "true";
+    const hasCustomTemplate = isCustomTemplate === "true";
 
     rows = [
       createObject("Project Name", name),
@@ -80,19 +67,23 @@ export default function Table({ projectData }) {
       createObject("API Key", <code>${apiKey}</code>),
       createObject("Subscribers", addCommas(subscribers)),
       createObject("Slugs", addCommas(slugs)),
-      createObject("Has Custom email template",  hasCustomTemplate ? "Yes" : "No"), 
-      createObject("Created", simplifyDate(createdAt))
+      createObject(
+        "Used a custom email template?",
+        hasCustomTemplate ? "Yes" : "No"
+      ),
+      createObject("Created on", simplifyDate(createdAt)),
     ];
 
     if (hasCustomTemplate) {
       rows.splice(7, 0, createObject("Custom template", customTemplateData));
     }
   }
+
   return (
     <Div className="table-main-container">
       {projectData ? (
         <TableContainer component={Paper}>
-          <TableEl className={classes.table} aria-label="customized table">
+          <TableEl aria-label="customized table" sx={{ minWidth: 200 }}>
             <TableBody>
               {rows.map((row) => (
                 <StyledTableRow key={row.key}>
@@ -112,7 +103,7 @@ export default function Table({ projectData }) {
   );
 }
 
-const Div = styled.div`
+const Div = styled("div")`
   display: flex;
   justify-content: center;
   align-items: center;

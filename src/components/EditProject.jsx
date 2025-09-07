@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { withRouter } from "react-router-dom";
 import styled from "styled-components";
-import { Container } from "@material-ui/core";
+import { Container } from "@mui/material";
 import axios from "axios";
 import { Helmet } from "react-helmet";
 import ProjectForm from "./ProjectForm";
+import { useNavigate, useParams } from "react-router-dom";
 
 // This component works for both, create project and edit project.
 function EditProject({
@@ -12,15 +12,14 @@ function EditProject({
   fetchProjects,
   projectData,
   getSelectedProject,
-  history,
-  match,
 }) {
   const [status, updateStatus] = useState(null);
+  const { id: projectId } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (getSelectedProject) {
-      const id = match.params.id;
-      getSelectedProject(id);
+      getSelectedProject(projectId);
     }
   }, [projects]);
 
@@ -50,7 +49,7 @@ function EditProject({
       if (status === 201) {
         updateStatus({ currentStatus: true, msg: "Created project" });
         await fetchProjects(token);
-        setTimeout(() => history.push("/dashboard"), 700);
+        setTimeout(() => navigate("/dashboard"), 700);
       } else {
         await updateStatus({ currentStatus: false, msg: "There's an error" });
         setTimeout(() => updateStatus(null), 3000);
@@ -73,10 +72,8 @@ function EditProject({
     const token = JSON.parse(localStorage.getItem("userToken"));
 
     try {
-      const id = match.params.id;
-
       const { status } = await axios.patch(
-        `/projects/${id}`,
+        `/projects/${projectId}`,
         {
           name,
           siteUrl,
@@ -93,7 +90,7 @@ function EditProject({
       if (status === 200) {
         updateStatus({ currentStatus: true, msg: "Updated project" });
         await fetchProjects(token);
-        setTimeout(() => history.push("/dashboard"), 700);
+        setTimeout(() => navigate("/dashboard"), 700);
       } else {
         await updateStatus({ currentStatus: false, msg: "There's an error" });
         setTimeout(() => updateStatus(null), 3000);
@@ -131,7 +128,7 @@ function EditProject({
           </div>
           <div className="form-main-container">
             <ProjectForm
-              handleSubmit={match.params.id ? handleEdit : handleSubmit}
+              handleSubmit={projectId ? handleEdit : handleSubmit}
               projectData={projectData}
             />
           </div>
@@ -141,7 +138,7 @@ function EditProject({
   );
 }
 
-export default withRouter(EditProject);
+export default EditProject;
 
 const ProjectContainer = styled.div`
   max-height: 120vh;

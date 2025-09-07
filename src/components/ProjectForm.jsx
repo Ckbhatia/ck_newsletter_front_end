@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import Switch from "@material-ui/core/Switch";
+import Switch from '@mui/material/Switch';
 
 export default function ProjectForm({ handleSubmit, projectData }) {
   const [name, updateName] = useState("");
