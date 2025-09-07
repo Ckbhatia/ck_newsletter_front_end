@@ -1,6 +1,5 @@
 import React, { useEffect, useContext } from "react";
-import { withRouter } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Context from "../components/Context";
 /**
@@ -17,6 +16,7 @@ function getCookie(name) {
 const Landing = props => {
 
   const { fetchUser, isAuthenticated } = useContext(Context);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // TODO: put token inside the cookie and access from there
@@ -24,14 +24,13 @@ const Landing = props => {
     if (token && !isAuthenticated) {
       localStorage.setItem("userToken", JSON.stringify(token));
       if (!isAuthenticated) {
-        console.log("fetch called")
         fetchUser(token, redirect);
       }
     }
   }, []);
 
   const redirect = (path) => {
-    props.history.push(path);
+    navigate(path);
   }
 
   return (
@@ -441,7 +440,7 @@ const Landing = props => {
   );
 }
 
-export default withRouter(Landing);
+export default Landing;
 
 const Div = styled.div`
   .front-container {

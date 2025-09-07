@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // import styled from "styled-components";
 // import { FaGithub, FaGoogle, FaFacebookF, FaTwitter } from 'react-icons/fa';
 import axios from "axios";
@@ -20,6 +20,7 @@ const Login = (props) => {
   const [password, setPassword] = useState("");
   const [isError, updateError] = useState(false);
   const [message, setMessages] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,7 +33,7 @@ const Login = (props) => {
       });
       if (status === 200) {
         // Redirect the user to dashboard page
-        props.history.push("/dashboard")
+        navigate("/dashboard")
 
         // Set the user
         await props.updateUser(data.data);
@@ -130,4 +131,4 @@ const Login = (props) => {
   );
 };
 
-export default withRouter(Login);
+export default Login;

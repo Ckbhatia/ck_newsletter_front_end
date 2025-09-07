@@ -1,21 +1,22 @@
 import React, { useEffect } from "react";
-import { Link, withRouter } from "react-router-dom";
-import { Container } from "@material-ui/core";
+import { useParams, Link } from 'react-router-dom';
+import { Container } from "@mui/material";
 import styled from "styled-components";
 import Table from "./Table";
 import { Helmet } from "react-helmet";
 
 const Project = ({
   projects,
-  match,
   getSelectedProject,
   projectData,
   deleteProject,
 }) => {
+  const { id: projectID } = useParams();
+
   useEffect(() => {
-    const id = match.params.id;
-    getSelectedProject(id);
-  }, [projects]);
+    console.log(projectID, 'projectID');
+    getSelectedProject(projectID);
+  }, [projects, projectID]);
 
   return (
     <Div className="project-main-container">
@@ -54,7 +55,7 @@ const Project = ({
   );
 };
 
-export default withRouter(Project);
+export default Project;
 
 const Div = styled.div`
   max-height: 120vh;

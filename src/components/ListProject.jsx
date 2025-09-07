@@ -1,12 +1,11 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 import { FcComments, FcLink, FcLike } from "react-icons/fc";
 
 export default function ListProject({ project }) {
   const { _id, name, siteUrl, slugs, subscribers, updatedAt } = project;
-
-  const history = useHistory();
+  const navigate = useNavigate();
 
   // Simplify date format
   let date = new Date(updatedAt);
@@ -15,7 +14,7 @@ export default function ListProject({ project }) {
     .substring(11, 19)}`;
 
     const handleClick = () => {
-      history.push(`/project/${_id}`);
+      navigate(`/project/${_id}`);
     }
 
   return (

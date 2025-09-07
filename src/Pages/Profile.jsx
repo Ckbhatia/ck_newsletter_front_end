@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Container } from "@material-ui/core";
+import { Container } from "@mui/material";
 import axios from "axios";
 import { Helmet } from "react-helmet";
 

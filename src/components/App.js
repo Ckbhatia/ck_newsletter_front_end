@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Switch, Route, withRouter } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Context from "./Context";
 import Layout from "./Layout";
-// import Loader from "./Loader";
 import config from "../config";
 
 import Landing from "../Pages/Landing";
@@ -23,13 +22,15 @@ axios.defaults.baseURL =
     ? config.productionURL
     : config.developmentURL;
 
-const App = (props) => {
+const App = () => {
   const [user, updateUser] = useState(null);
   const [projects, updateProjects] = useState(null);
   const [projectData, updateProjectData] = useState(null);
   const [error, updateError] = useState(null);
   const [isFetchingUser, updateFetchingUser] = useState(false);
   const [isAuthenticated, updateAuthenticated] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("userToken"));
@@ -54,16 +55,16 @@ const App = (props) => {
         updateAuthenticated(true);
         // Set the user
         await updateUser(data.user);
-        if (redirect) redirect("/dashboard")
+        if (redirect) redirect("/dashboard");
       } else {
         // Clear the invalid tokens and redirect to the login
         localStorage.clear();
-        props.history.push("/login");
+        navigate("/login");
       }
     } catch (err) {
       // Clear the invalid tokens and redirect to the login
       localStorage.clear();
-      props.history.push("/login");
+      navigate("/login");
     }
   };
 
@@ -81,19 +82,20 @@ const App = (props) => {
       } else {
         // Clear the invalid tokens and redirect to the login
         localStorage.clear();
-        props.history.push("/login");
+        navigate("/login");
       }
     } catch (err) {
       // Clear the invalid tokens and redirect to the login
       localStorage.clear();
-      props.history.push("/login");
+      navigate("/login");
     }
   };
 
   const handleLogout = () => {
     updateAuthenticated(false);
     // Clear the token cookie
-    document.cookie = "userToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie =
+      "userToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     updateUser(null);
     updateProjects(null);
     localStorage.clear();
@@ -114,7 +116,7 @@ const App = (props) => {
     // Pre update projects
     updateProjects(newProjects);
     // Push to the dashboard
-    props.history.push("/dashboard");
+    navigate("/dashboard");
 
     const token = JSON.parse(localStorage.getItem("userToken"));
 
@@ -151,157 +153,71 @@ const App = (props) => {
 
   const privateRoutes = () => {
     return (
-      <Switch>
+      <Routes>
         <Route
           path="/dashboard"
-          render={() => {
-            return (
-              <Layout>
-                <Dashboard projects={projects} error={error} />
-              </Layout>
-            );
-          }}
+          element={<Dashboard projects={projects} error={error} />}
         />
-        <Route
-          path="/docs"
-          render={() => {
-            return (
-              <Layout>
-                <Docs />
-              </Layout>
-            );
-          }}
-        />
+        <Route path="/docs" element={<Docs />} />
         <Route
           exact
           path="/project/:id"
-          render={() => {
-            return (
-              <Layout>
-                <Project
-                  projects={projects}
-                  projectData={projectData}
-                  deleteProject={deleteProject}
-                  getSelectedProject={getSelectedProject}
-                />
-              </Layout>
-            );
-          }}
+          element={
+            <Project
+              projects={projects}
+              projectData={projectData}
+              deleteProject={deleteProject}
+              getSelectedProject={getSelectedProject}
+            />
+          }
         />
-        <Route
-          path="/account/profile"
-          render={() => {
-            return (
-              <Layout>
-                <Profile user={user} />
-              </Layout>
-            );
-          }}
-        />
+        <Route path="/account/profile" element={<Profile user={user} />} />
         <Route
           path="/projects/create"
-          render={() => {
-            return (
-              <Layout>
-                <EditProject fetchProjects={fetchProjects} />
-              </Layout>
-            );
-          }}
+          element={<EditProject fetchProjects={fetchProjects} />}
         />
         <Route
           path="/project/:id/edit"
-          render={() => {
-            return (
-              <Layout>
-                <EditProject
-                  projects={projects}
-                  fetchProjects={fetchProjects}
-                  projectData={projectData}
-                  getSelectedProject={getSelectedProject}
-                />
-              </Layout>
-            );
-          }}
+          element={
+            <EditProject
+              projects={projects}
+              fetchProjects={fetchProjects}
+              projectData={projectData}
+              getSelectedProject={getSelectedProject}
+            />
+          }
         />
-        <Route
-          path="*"
-          render={() => {
-            return (
-              <Layout>
-                <PageNotFound homeLink={"/dashboard"} />
-              </Layout>
-            );
-          }}
-        />
-      </Switch>
+        <Route path="*" element={<PageNotFound homeLink={"/dashboard"} />} />
+      </Routes>
     );
   };
 
   const publicRoutes = () => {
     return (
-      <Switch>
-        <Route
-          exact
-          path="/"
-          render={() => {
-            return (
-              <Layout>
-                <Landing />
-              </Layout>
-            );
-          }}
-        />
-        <Route
-          path="/docs"
-          render={() => {
-            return (
-              <Layout>
-                <Docs />
-              </Layout>
-            );
-          }}
-        />
+      <Routes>
+        <Route exact path="/" element={<Landing />} />
+        <Route path="/docs" element={<Docs />} />
         <Route
           path="/login"
-          render={() => {
-            return (
-              <Layout>
-                <Login updateUser={updateUser} fetchProjects={fetchProjects} />
-              </Layout>
-            );
-          }}
+          element={
+            <Login updateUser={updateUser} fetchProjects={fetchProjects} />
+          }
         />
-        <Route
-          path="/register"
-          render={() => {
-            return (
-              <Layout>
-                <Register />
-              </Layout>
-            );
-          }}
-        />
-        <Route
-          path="*"
-          render={() => {
-            return (
-              <Layout>
-                <PageNotFound homeLink={"/"} />
-              </Layout>
-            );
-          }}
-        />
-      </Switch>
+        <Route path="/register" element={<Register />} />
+        <Route path="*" element={<PageNotFound homeLink={"/"} />} />
+      </Routes>
     );
   };
 
   return (
-    <Context.Provider value={{ isAuthenticated, user, fetchUser, projects, handleLogout }}>
-      {isFetchingUser || user ? privateRoutes() : publicRoutes()}
-      {/* {isFetchingUser && <Layout><Loader /></Layout> || isAuthenticated ? privateRoutes() : publicRoutes()} */}
-      {/* {isAuthenticated ? privateRoutes() : publicRoutes()} */}
+    <Context.Provider
+      value={{ isAuthenticated, user, fetchUser, projects, handleLogout }}
+    >
+      <Layout>
+        {isFetchingUser || user ? privateRoutes() : publicRoutes()}
+      </Layout>
     </Context.Provider>
   );
 };
 
-export default withRouter(App);
+export default App;

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // import { FaGithub, FaGoogle, FaFacebookF, FaTwitter } from 'react-icons/fa';
 import axios from "axios";
 import config from "../config";
@@ -18,6 +18,7 @@ const Register = (props) => {
   const [formData, setFormData] = useState({});
   const [isError, updateError] = useState(false);
   const [message, setMessages] = useState("");
+  const navigate = useNavigate();
 
   const handleEdit = (e) => {
     const field = e.target.name;
@@ -37,7 +38,7 @@ const Register = (props) => {
         setMessages("Successfully registered. Please login.");
         // Redirect the user to login page
         setTimeout(() => {
-          props.history.push("/login");
+          navigate("/login");
         }, 1000);
       } else {
         setMessages("Something went wrong. Please try again.");
@@ -143,4 +144,4 @@ const Register = (props) => {
   );
 };
 
-export default withRouter(Register);
+export default Register;
