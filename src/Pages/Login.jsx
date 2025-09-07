@@ -6,7 +6,7 @@ import axios from "axios";
 import config from "../config";
 import { Helmet } from "react-helmet";
 import { production_text } from "../constants";
-import { StyledAuthenticationWrapper } from "./Common";
+import { StyledAuthenticationWrapper } from "../components/Common";
 
 // Axios configuration
 const rootUrl = process.env.NODE_ENV === production_text

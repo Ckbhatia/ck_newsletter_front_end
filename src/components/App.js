@@ -6,15 +6,15 @@ import Layout from "./Layout";
 // import Loader from "./Loader";
 import config from "../config";
 
-import Landing from "./Landing";
-import Login from "./Login";
-import Register from "./Register";
-import Profile from "./Profile";
-import Dashboard from "./Dashboard";
+import Landing from "../Pages/Landing";
+import Login from "../Pages/Login";
+import Register from "../Pages/Register";
+import Profile from "../Pages/Profile";
+import Dashboard from "../Pages/Dashboard";
 import Project from "./Project";
 import EditProject from "./EditProject";
-import PageNotFound from "./PageNotFound";
-import Docs from "./Docs";
+import PageNotFound from "../Pages/PageNotFound";
+import Docs from "../Pages/Docs";
 import { production_text } from "../constants";
 
 // Axios configuration
