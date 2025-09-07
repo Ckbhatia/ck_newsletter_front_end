@@ -225,7 +225,7 @@ export default function Profile(props) {
 }
 
 const ProfileElement = styled.div`
-  max-height: 120vh;
+  margin-top: 40px;
   min-height: 90vh;
   display: flex;
   justify-content: center;

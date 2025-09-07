@@ -9,6 +9,8 @@ import {
 } from "@mui/material";
 import Loader from "./Loader";
 import { styled } from "@mui/material/styles";
+import Markdown from "react-markdown";
+import { MarkdownWrapper } from "./ProjectForm";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${TableCell.head}`]: {
@@ -75,7 +77,16 @@ export default function Table({ projectData }) {
     ];
 
     if (hasCustomTemplate) {
-      rows.splice(7, 0, createObject("Custom template", customTemplateData));
+      rows.splice(
+        7,
+        0,
+        createObject(
+          "Custom template",
+          <MarkdownWrapper>
+            <Markdown>{customTemplateData}</Markdown>
+          </MarkdownWrapper>
+        )
+      );
     }
   }
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import Switch from '@mui/material/Switch';
+import Markdown from "react-markdown";
+import Switch from "@mui/material/Switch";
 
 export default function ProjectForm({ handleSubmit, projectData }) {
   const [name, updateName] = useState("");
@@ -10,12 +11,8 @@ export default function ProjectForm({ handleSubmit, projectData }) {
 
   useEffect(() => {
     if (projectData) {
-      const {
-        name,
-        siteUrl,
-        isCustomTemplate,
-        customTemplateData,
-      } = projectData;
+      const { name, siteUrl, isCustomTemplate, customTemplateData } =
+        projectData;
       updateName(name);
       updateSiteUrl(siteUrl);
       const value = isCustomTemplate === "true" ? true : false;
@@ -46,7 +43,7 @@ export default function ProjectForm({ handleSubmit, projectData }) {
             onChange={(e) => updateName(e.target.value)}
           />
         </label>
-        <label>
+        <Label>
           Site url
           <input
             required
@@ -58,9 +55,9 @@ export default function ProjectForm({ handleSubmit, projectData }) {
             value={siteUrl}
             onChange={(e) => updateSiteUrl(e.target.value)}
           />
-        </label>
+        </Label>
         <div className="input-container">
-          <span className="custom-text">Custom Template</span>
+          <span className="custom-text">Add custom template</span>
           <Switch
             checked={isCustomTemplate}
             onChange={() => updateCustomTemplate(!isCustomTemplate)}
@@ -70,15 +67,21 @@ export default function ProjectForm({ handleSubmit, projectData }) {
           />
         </div>
         {isCustomTemplate && (
-          <textarea
-            type="textarea"
-            name="custom template"
-            className="input"
-            placeholder="paste your custom template here ( HTML )"
-            value={customTemplateData}
-            required
-            onChange={(e) => updatecustomTemplateData(e.target.value)}
-          ></textarea>
+          <>
+            <textarea
+              type="textarea"
+              name="custom template"
+              className="input"
+              placeholder="Write or paste your copied custom template here ( Markdown format )"
+              value={customTemplateData}
+              required
+              onChange={(e) => updatecustomTemplateData(e.target.value)}
+            ></textarea>
+            <span className="title-text">Preview</span>
+            <MarkdownWrapper>
+              <Markdown>{customTemplateData}</Markdown>
+            </MarkdownWrapper>
+          </>
         )}
         <input className="submit-btn" type="submit" value="Submit" />
       </form>
@@ -109,6 +112,11 @@ const FormContainer = styled.div`
       font-size: 1.18rem;
     }
   }
+
+  textarea {
+    resize: vertical;
+  }
+
   .submit-btn {
     background-color: #40b9ff;
     color: #ffffff;
@@ -145,4 +153,27 @@ const FormContainer = styled.div`
     font-size: 1.3rem;
     color: #1f1f1f;
   }
+
+  .title-text {
+    display: inline-block;
+    padding-top: 15px;
+  }
+`;
+
+export const MarkdownWrapper = styled.div`
+  margin: 20px 0;
+  padding: 20px 10px;
+  border: 1px solid #d6d6d6;
+  border-radius: 5px;
+  overflow-x: scroll;
+  max-height: 350px;
+
+  img {
+    max-width: 35%;
+  }
+`;
+
+const Label = styled.label`
+  display: inline-block;
+  padding-top: 15px;
 `;

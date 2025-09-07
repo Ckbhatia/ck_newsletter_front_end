@@ -14,7 +14,6 @@ const Project = ({
   const { id: projectID } = useParams();
 
   useEffect(() => {
-    console.log(projectID, 'projectID');
     getSelectedProject(projectID);
   }, [projects, projectID]);
 
@@ -58,7 +57,7 @@ const Project = ({
 export default Project;
 
 const Div = styled.div`
-  max-height: 120vh;
+  margin-top: 40px;
   min-height: 85vh;
   background-color: #f7fbfb;
   display: flex;
