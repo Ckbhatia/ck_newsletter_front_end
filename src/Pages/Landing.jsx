@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from "react";
 import { withRouter } from "react-router-dom";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import Context from "./Context";
+import Context from "../components/Context";
 /**
  * Get cookie string value with passed key
  * @param {string} key

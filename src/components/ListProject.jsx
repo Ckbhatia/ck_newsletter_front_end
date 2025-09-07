@@ -26,13 +26,13 @@ export default function ListProject({ project }) {
         <div className="project-details">
           <div className="project-site-info">
             <FcLink />{" "}
-            <a className="site-url-text" target="_blank" rel="noopener noreferrer" href={siteUrl}>
+            <a className="site-url-text" target="_blank" rel="noopener noreferrer" href={`//${siteUrl}`} onClick={(e) => e.stopPropagation()}>
               {siteUrl}
             </a>
           </div>
           <div className="project-detail-count">
             <span className="project-last-slug">
-              <FcComments /> blogs: {slugs && slugs.length}
+              <FcComments /> content: {slugs && slugs.length}
             </span>
             <span className="project-last-subscriber">
               <FcLike /> subscribers: {subscribers && subscribers.length}
@@ -44,7 +44,7 @@ export default function ListProject({ project }) {
               Recent subscriber: {subscribers[subscribers.length - 1]}
             </span>
             <span className="last-slug">
-              Recent blog: {slugs[slugs.length - 1]}
+              Recent content: {slugs[slugs.length - 1]}
             </span>
           </div>
         </div>
